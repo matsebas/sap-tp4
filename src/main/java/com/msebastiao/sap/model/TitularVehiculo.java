@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "titulares_vehiculos")
+@Table(name = "titular_vehiculo")
 public class TitularVehiculo {
 
     @Id
@@ -23,7 +23,7 @@ public class TitularVehiculo {
     @Column(name = "dni", nullable = false, length = 15)
     private String dni;
 
-    @OneToMany(mappedBy = "titularVehiculo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "titularVehiculo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Vehiculo> vehiculos; // Relación con Vehículo
 
 
@@ -107,4 +107,5 @@ public class TitularVehiculo {
     public String toString() {
         return nombre + ' ' + apellido;
     }
+
 }

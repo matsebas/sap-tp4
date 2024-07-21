@@ -54,7 +54,8 @@ public class TitularVehiculoDAO implements DAO<TitularVehiculo> {
             Transaction tx = session.beginTransaction();
             TitularVehiculo titularVehiculo = session.get(TitularVehiculo.class, id);
             if (titularVehiculo != null) {
-                session.delete(titularVehiculo);
+                titularVehiculo.setVehiculos(null);
+                session.remove(titularVehiculo);
             }
             tx.commit();
         }

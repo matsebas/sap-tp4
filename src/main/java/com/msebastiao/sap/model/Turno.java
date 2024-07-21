@@ -26,7 +26,7 @@ public class Turno {
     @Column(name = "estado", length = 50)
     private String estado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "titular_vehiculo_id")
     private TitularVehiculo titularVehiculo;
 

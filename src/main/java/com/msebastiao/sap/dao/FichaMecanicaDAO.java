@@ -62,6 +62,11 @@ public class FichaMecanicaDAO implements DAO<FichaMecanica> {
             Transaction tx = session.beginTransaction();
             FichaMecanica ficha = session.get(FichaMecanica.class, id);
             if (ficha != null) {
+                ficha.setActividadesRealizadas(null);
+                ficha.setRepuestosEmpleados(null);
+                ficha.setMecanico(null);
+                ficha.setVehiculo(null);
+                ficha.setTitularVehiculo(null);
                 session.remove(ficha);
             }
             tx.commit();

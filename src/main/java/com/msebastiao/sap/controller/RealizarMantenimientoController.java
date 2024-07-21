@@ -139,7 +139,7 @@ public class RealizarMantenimientoController {
         }
 
         try {
-            Actividad nuevaActividad = new Actividad(descripcion, 9, estado, fichaActual.getId());
+            Actividad nuevaActividad = new Actividad(descripcion, 9, estado, fichaActual);
             actividadDAO.insert(nuevaActividad); // Insertar en la base de datos
             actividadesData.add(nuevaActividad); // Agregar a la tabla
             descripcionActividadField.clear(); // Limpiar el campo de texto
@@ -166,7 +166,7 @@ public class RealizarMantenimientoController {
         }
 
         try {
-            Repuesto nuevoRepuesto = new Repuesto(nombre, cantidad, fichaActual.getId());
+            Repuesto nuevoRepuesto = new Repuesto(nombre, cantidad, fichaActual);
             repuestoDAO.insert(nuevoRepuesto); // Insertar en la base de datos
             repuestosData.add(nuevoRepuesto); // Agregar a la tabla
             nombreRepuestoField.clear();

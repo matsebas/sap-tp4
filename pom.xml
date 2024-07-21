@@ -54,12 +54,8 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.7</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.7</version>
-        </dependency>
-        <!-- Dependencia para JUnit -->
+
+        <!-- Dependencias para JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -70,6 +66,40 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Dependencias para TestFX -->
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>4.0.18</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.18</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Dependencias para Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Dependencia para H2 Database (para pruebas en memoria) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.3.230</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.msebastiao</groupId>
+            <artifactId>matsebas-sap-tp4</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -104,6 +134,21 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <argLine>
+                        --add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-exports=javafx.base/com.sun.javafx.collections=ALL-UNNAMED
+                        --add-exports=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
+                        --add-exports=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED
+                        --add-opens=javafx.controls/javafx.scene.control.skin=ALL-UNNAMED
+                    </argLine>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -15,15 +15,15 @@ public class FichaMecanica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mecanico_id")
     private Mecanico mecanico;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "titular_vehiculo_id")
     private TitularVehiculo titularVehiculo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
 
@@ -36,10 +36,10 @@ public class FichaMecanica {
     @Column(name = "estado", length = 50)
     private String estado;
 
-    @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Actividad> actividadesRealizadas;
 
-    @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Repuesto> repuestosEmpleados;
 
 

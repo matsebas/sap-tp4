@@ -1,6 +1,7 @@
 package com.msebastiao.sap.dao;
 
 import com.msebastiao.sap.model.Actividad;
+import com.msebastiao.sap.model.FichaMecanica;
 import com.msebastiao.sap.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,8 +14,13 @@ public class ActividadDAO implements DAO<Actividad> {
 
     private final SessionFactory sessionFactory;
 
+
     public ActividadDAO() {
         this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
+    public ActividadDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -56,17 +62,14 @@ public class ActividadDAO implements DAO<Actividad> {
             Transaction tx = session.beginTransaction();
             Actividad actividad = session.get(Actividad.class, id);
             if (actividad != null) {
+                FichaMecanica fichaMecanica = actividad.getFichaMecanica();
+                if (fichaMecanica != null) {
+                    fichaMecanica.getActividadesRealizadas().remove(actividad); // Desasociar la actividad
+                    session.merge(fichaMecanica); // Actualizar la ficha mecánica
+                }
                 session.remove(actividad);
             }
             tx.commit();
-        }
-    }
-
-    public List<Actividad> getByFichaMecanicaId(int fichaMecanicaId) {
-        try (Session session = sessionFactory.openSession()) {
-            Query<Actividad> query = session.createQuery("FROM Actividad WHERE fichaMecanicaId = :fichaMecanicaId", Actividad.class);
-            query.setParameter("fichaMecanicaId", fichaMecanicaId);
-            return query.list();
         }
     }
 }

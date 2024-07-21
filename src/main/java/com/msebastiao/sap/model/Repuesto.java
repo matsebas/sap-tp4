@@ -9,7 +9,7 @@ public class Repuesto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -17,31 +17,32 @@ public class Repuesto {
     @Column(name = "cantidad")
     private int cantidad;
 
-    @Column(name = "ficha_mecanica_id", nullable = false)
-    private int fichaMecanicaId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ficha_mecanica_id", nullable = false)
+    private FichaMecanica fichaMecanica;
 
-    public Repuesto(int id, String nombre, int cantidad, int fichaMecanicaId) {
+    public Repuesto(Integer id, String nombre, int cantidad, FichaMecanica fichaMecanica) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.fichaMecanicaId = fichaMecanicaId;
+        this.fichaMecanica = fichaMecanica;
     }
 
-    public Repuesto(String nombre, int cantidad, int fichaMecanicaId) {
+    public Repuesto(String nombre, int cantidad, FichaMecanica fichaMecanica) {
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.fichaMecanicaId = fichaMecanicaId;
+        this.fichaMecanica = fichaMecanica;
     }
 
     public Repuesto() {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,11 +62,11 @@ public class Repuesto {
         this.cantidad = cantidad;
     }
 
-    public int getFichaMecanicaId() {
-        return fichaMecanicaId;
+    public FichaMecanica getFichaMecanica() {
+        return fichaMecanica;
     }
 
-    public void setFichaMecanicaId(int fichaMecanicaId) {
-        this.fichaMecanicaId = fichaMecanicaId;
+    public void setFichaMecanica(FichaMecanica fichaMecanica) {
+        this.fichaMecanica = fichaMecanica;
     }
 }

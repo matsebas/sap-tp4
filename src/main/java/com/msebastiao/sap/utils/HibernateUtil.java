@@ -1,22 +1,16 @@
 package com.msebastiao.sap.utils;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
+    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    private static final SessionFactory sessionFactory;
-
-    static {
+    private static SessionFactory buildSessionFactory() {
         try {
-            Configuration configuration = new Configuration().configure();
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties()).build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            return new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
-            System.err.println("Error al crear SessionFactory: " + ex);
+            System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import static com.msebastiao.sap.view.AlertUtil.alert;
@@ -22,11 +21,11 @@ public class SupervisarTareasController {
     @FXML
     private ListView<String> tareasCanceladasList;
 
-    private ActividadDAO actividadDAO;
+    ActividadDAO actividadDAO;
 
 
     @FXML
-    private void initialize() {
+    void initialize() {
         try {
             actividadDAO = new ActividadDAO();
             cargarTareas();
@@ -37,12 +36,12 @@ public class SupervisarTareasController {
     }
 
     @FXML
-    private void handleActualizarLista() {
+    void handleActualizarLista() {
         cargarTareas();
         alert(Alert.AlertType.INFORMATION, "Listas Actualizadas", "Las listas de tareas han sido actualizadas.");
     }
 
-    private void cargarTareas() {
+    void cargarTareas() {
         try {
             tareasEnCursoList.getItems().clear();
             tareasFinalizadasList.getItems().clear();

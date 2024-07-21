@@ -2,7 +2,7 @@ package com.msebastiao.sap.model;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "Actividad")
 @Table(name = "actividades")
 public class Actividad {
 
@@ -20,22 +20,23 @@ public class Actividad {
     @Column(name = "estado", nullable = false, length = 50)
     private String estado;
 
-    @Column(name = "ficha_mecanica_id", nullable = false)
-    private Integer fichaMecanicaId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ficha_mecanica_id", nullable = false)
+    private FichaMecanica fichaMecanica;
 
-    public Actividad(int id, String descripcion, int tiempoEmpleado, String estado, int fichaMecanicaId) {
+    public Actividad(int id, String descripcion, int tiempoEmpleado, String estado, FichaMecanica fichaMecanica) {
         this.id = id;
         this.descripcion = descripcion;
         this.tiempoEmpleado = tiempoEmpleado;
         this.estado = estado;
-        this.fichaMecanicaId = fichaMecanicaId;
+        this.fichaMecanica = fichaMecanica;
     }
 
-    public Actividad(String descripcion, int tiempoEmpleado, String estado, int fichaMecanicaId) {
+    public Actividad(String descripcion, int tiempoEmpleado, String estado, FichaMecanica fichaMecanica) {
         this.descripcion = descripcion;
         this.tiempoEmpleado = tiempoEmpleado;
         this.estado = estado;
-        this.fichaMecanicaId = fichaMecanicaId;
+        this.fichaMecanica = fichaMecanica;
     }
 
     public Actividad() {
@@ -74,18 +75,16 @@ public class Actividad {
         this.estado = estado;
     }
 
-    public int getFichaMecanicaId() {
-        return fichaMecanicaId;
+    public FichaMecanica getFichaMecanica() {
+        return fichaMecanica;
     }
 
-    public void setFichaMecanicaId(int fichaMecanicaId) {
-        this.fichaMecanicaId = fichaMecanicaId;
+    public void setFichaMecanica(FichaMecanica fichaMecanica) {
+        this.fichaMecanica = fichaMecanica;
     }
 
     @Override
     public String toString() {
-        return "Actividad #" + id +
-                " / " + descripcion +
-                " (" + estado + ')';
+        return "Actividad #" + id + " / " + descripcion + " (" + estado + ')';
     }
 }

@@ -1,5 +1,6 @@
 package com.msebastiao.sap.dao;
 
+import com.msebastiao.sap.model.FichaMecanica;
 import com.msebastiao.sap.model.Repuesto;
 import com.msebastiao.sap.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -56,6 +57,11 @@ public class RepuestoDAO implements DAO<Repuesto> {
             Transaction tx = session.beginTransaction();
             Repuesto repuesto = session.get(Repuesto.class, id);
             if (repuesto != null) {
+                FichaMecanica fichaMecanica = repuesto.getFichaMecanica();
+                if (fichaMecanica != null) {
+                    fichaMecanica.getRepuestosEmpleados().remove(repuesto); // Desasociar el repuesto
+                    session.merge(fichaMecanica); // Actualizar la ficha mecánica
+                }
                 session.remove(repuesto);
             }
             tx.commit();

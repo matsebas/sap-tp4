@@ -20,7 +20,7 @@ public class Vehiculo {
     @Column(name = "anio", nullable = false)
     private int anio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "titular_vehiculo_id")
     private TitularVehiculo titularVehiculo; // Relación con TitularVehiculo
 
