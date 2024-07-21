@@ -1,18 +1,26 @@
 package com.msebastiao.sap.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-@Table(name = "actividades")
 @Entity
+@Table(name = "actividades")
 public class Actividad {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
+
+    @Column(name = "tiempo_empleado")
     private Integer tiempoEmpleado;
+
+    @Column(name = "estado", nullable = false, length = 50)
     private String estado;
+
+    @Column(name = "ficha_mecanica_id", nullable = false)
     private Integer fichaMecanicaId;
 
     public Actividad(int id, String descripcion, int tiempoEmpleado, String estado, int fichaMecanicaId) {

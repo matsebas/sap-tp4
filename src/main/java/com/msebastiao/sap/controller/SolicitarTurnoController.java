@@ -78,7 +78,7 @@ public class SolicitarTurnoController {
         try {
             TurnoDAO turnoDAO = new TurnoDAO();
             turnos = turnoDAO.getAll();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Turnos");
             alert.setHeaderText(null);
@@ -123,7 +123,7 @@ public class SolicitarTurnoController {
 
             alert(Alert.AlertType.INFORMATION, "Turno Solicitado", "El turno ha sido solicitado exitosamente.");
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error", "No se pudo solicitar el turno por un error inesperado.");
             e.printStackTrace();
         }

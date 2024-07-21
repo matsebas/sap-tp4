@@ -7,12 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(name = "fichas_mecanicas")
 @Entity
+@Table(name = "fichas_mecanicas")
 public class FichaMecanica {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Asumiendo que la base de datos genera el ID automáticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,8 +27,13 @@ public class FichaMecanica {
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
 
+    @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
+
+    @Column(name = "fecha_fin")
     private LocalDate fechaFin;
+
+    @Column(name = "estado", length = 50)
     private String estado;
 
     @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -60,6 +65,10 @@ public class FichaMecanica {
         this.estado = estado;
         this.actividadesRealizadas = actividadesRealizadas;
         this.repuestosEmpleados = repuestosEmpleados;
+    }
+
+    public FichaMecanica() {
+
     }
 
     public Integer getId() {

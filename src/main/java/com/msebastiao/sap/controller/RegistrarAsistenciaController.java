@@ -108,7 +108,7 @@ public class RegistrarAsistenciaController {
                     .filter(turno -> "Solicitado".equals(turno.getEstado()) || "Confirmado".equals(turno.getEstado())).toList();
             turnosData.clear();
             turnosData.addAll(turnosSolicitados);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al cargar los turnos.");
             e.printStackTrace();
         }
@@ -121,7 +121,7 @@ public class RegistrarAsistenciaController {
             List<Turno> turnosEncontrados = turnoDAO.getAll().stream().filter(turno -> turno.getTitularVehiculo() != null && (turno.getTitularVehiculo().getDni().toLowerCase().contains(busqueda) || turno.getTitularVehiculo().getApellido().toLowerCase().contains(busqueda))).toList();
             turnosData.clear();
             turnosData.addAll(turnosEncontrados);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al buscar turnos.");
             e.printStackTrace();
         }
@@ -142,7 +142,7 @@ public class RegistrarAsistenciaController {
 
                 alert(Alert.AlertType.INFORMATION, "Asistencia confirmada", "La asistencia ha sido confirmada.");
                 tablaTurnos.refresh();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al confirmar la asistencia.");
                 e.printStackTrace();
             }

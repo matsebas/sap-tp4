@@ -8,11 +8,16 @@ public class Repuesto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private int id;
 
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
+
+    @Column(name = "cantidad")
     private int cantidad;
 
+    @Column(name = "ficha_mecanica_id", nullable = false)
     private int fichaMecanicaId;
 
     public Repuesto(int id, String nombre, int cantidad, int fichaMecanicaId) {
@@ -26,6 +31,10 @@ public class Repuesto {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fichaMecanicaId = fichaMecanicaId;
+    }
+
+    public Repuesto() {
+
     }
 
     public int getId() {

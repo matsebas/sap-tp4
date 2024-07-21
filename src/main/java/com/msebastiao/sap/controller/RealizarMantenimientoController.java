@@ -84,7 +84,7 @@ public class RealizarMantenimientoController {
         try {
             List<FichaMecanica> fichas = fichaMecanicaDAO.getAll().stream().filter(f -> f.getFechaFin() == null).toList();
             fichasComboBox.setItems(FXCollections.observableArrayList(fichas));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al cargar las fichas activas");
             e.printStackTrace();
         }
@@ -112,7 +112,7 @@ public class RealizarMantenimientoController {
             }
             agregarActividadButton.setDisable(this.fichaActual == null);
             agregarRepuestoButton.setDisable(this.fichaActual == null);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al cargar los datos de la ficha");
             e.printStackTrace();
         }
@@ -144,7 +144,7 @@ public class RealizarMantenimientoController {
             actividadesData.add(nuevaActividad); // Agregar a la tabla
             descripcionActividadField.clear(); // Limpiar el campo de texto
             estadoActividadComboBox.getSelectionModel().clearSelection(); // Limpiar el estado seleccionado del combo
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al agregar la actividad.");
             e.printStackTrace();
         }
@@ -171,7 +171,7 @@ public class RealizarMantenimientoController {
             repuestosData.add(nuevoRepuesto); // Agregar a la tabla
             nombreRepuestoField.clear();
             cantidadRepuestoSpinner.getValueFactory().setValue(0);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al agregar el repuesto.");
             e.printStackTrace();
         }

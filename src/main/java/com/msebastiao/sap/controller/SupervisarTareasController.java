@@ -30,7 +30,7 @@ public class SupervisarTareasController {
         try {
             actividadDAO = new ActividadDAO();
             cargarTareas();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error inesperado.");
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class SupervisarTareasController {
                     .filter(actividad -> "En curso".equals(actividad.getEstado()))
                     .map(Actividad::toString).toList());
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             alert(Alert.AlertType.ERROR, "Error de base de datos", "Ocurrió un error al cargar las listas de tareas.");
             e.printStackTrace();
         }

@@ -11,13 +11,19 @@ public class TitularVehiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private int id;
 
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
+
+    @Column(name = "apellido", nullable = false, length = 100)
     private String apellido;
+
+    @Column(name = "dni", nullable = false, length = 15)
     private String dni;
 
-    @OneToMany(mappedBy = "titular", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "titularVehiculo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Vehiculo> vehiculos; // Relación con Vehículo
 
 
@@ -35,6 +41,10 @@ public class TitularVehiculo {
         this.apellido = apellido;
         this.dni = dni;
         this.vehiculos = vehiculos;
+    }
+
+    public TitularVehiculo() {
+
     }
 
     public int getId() {

@@ -11,17 +11,24 @@ public class Turno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
+    @Column(name = "fecha")
     private LocalDate fecha;
+
+    @Column(name = "hora_inicio")
     private LocalTime horaInicio;
+
+    @Column(name = "hora_fin")
     private LocalTime horaFin;
+
+    @Column(name = "estado", length = 50)
     private String estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "titular_vehiculo_id") // Nombre de la columna en la tabla turnos que referencia al titular
-    private TitularVehiculo titularVehiculo; // Relación con TitularVehiculo
-
+    @JoinColumn(name = "titular_vehiculo_id")
+    private TitularVehiculo titularVehiculo;
 
     public Turno(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, String estado, TitularVehiculo titularVehiculo) {
         this.fecha = fecha;
@@ -31,7 +38,7 @@ public class Turno {
         this.titularVehiculo = titularVehiculo;
     }
 
-    public Turno(int id, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, String estado, TitularVehiculo titularVehiculo) {
+    public Turno(Integer id, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, String estado, TitularVehiculo titularVehiculo) {
         this.id = id;
         this.fecha = fecha;
         this.horaInicio = horaInicio;
@@ -40,11 +47,15 @@ public class Turno {
         this.titularVehiculo = titularVehiculo;
     }
 
-    public int getId() {
+    public Turno() {
+
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -8,10 +8,16 @@ public class Vehiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private int id;
 
+    @Column(name = "marca", nullable = false, length = 100)
     private String marca;
+
+    @Column(name = "modelo", nullable = false, length = 100)
     private String modelo;
+
+    @Column(name = "anio", nullable = false)
     private int anio;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,6 +37,10 @@ public class Vehiculo {
         this.modelo = modelo;
         this.anio = anio;
         this.titularVehiculo = titularVehiculo;
+    }
+
+    public Vehiculo() {
+
     }
 
     public int getId() {

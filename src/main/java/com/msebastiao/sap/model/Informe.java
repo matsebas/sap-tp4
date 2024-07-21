@@ -1,17 +1,22 @@
 package com.msebastiao.sap.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-@Table(name = "informes")
 @Entity
+@Table(name = "informes")
 public class Informe {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "fecha")
     private LocalDate fecha;
+
+    @Column(name = "contenido", length = 1000)
     private String contenido;
 
     public Informe(Integer id, LocalDate fecha, String contenido) {
@@ -23,6 +28,10 @@ public class Informe {
     public Informe(LocalDate fecha, String contenido) {
         this.fecha = fecha;
         this.contenido = contenido;
+    }
+
+    public Informe() {
+
     }
 
     public Integer getId() {

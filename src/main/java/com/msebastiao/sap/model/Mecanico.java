@@ -8,8 +8,13 @@ public class Mecanico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
+
+    @Column(name = "apellido", nullable = false, length = 100)
     private String apellido;
 
     public Mecanico(Integer id, String nombre, String apellido) {
@@ -21,6 +26,10 @@ public class Mecanico {
     public Mecanico(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
+    }
+
+    public Mecanico() {
+
     }
 
     public Integer getId() {
