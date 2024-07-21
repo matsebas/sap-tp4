@@ -1,9 +1,18 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "repuestos")
 public class Repuesto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String nombre;
     private int cantidad;
+
     private int fichaMecanicaId;
 
     public Repuesto(int id, String nombre, int cantidad, int fichaMecanicaId) {

@@ -1,8 +1,9 @@
 package com.msebastiao.sap.dao;
 
-import com.msebastiao.sap.database.DatabaseConnection;
 import com.msebastiao.sap.model.TitularVehiculo;
 import com.msebastiao.sap.model.Turno;
+import com.msebastiao.sap.utils.HibernateUtil;
+import org.hibernate.SessionFactory;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -12,10 +13,10 @@ import java.util.List;
 
 public class TurnoDAO implements DAO<Turno> {
 
-    private final Connection connection;
+    private final SessionFactory sessionFactory;
 
-    public TurnoDAO() throws SQLException {
-        this.connection = DatabaseConnection.getInstance().getConnection();
+    public TurnoDAO() {
+        this.sessionFactory = HibernateUtil.getSessionFactory(); // Obtener la instancia del Singleton
     }
 
     @Override

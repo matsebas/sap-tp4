@@ -1,15 +1,27 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Entity
+@Table(name = "turnos")
 public class Turno {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private LocalDate fecha;
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private String estado;
-    private TitularVehiculo titularVehiculo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "titular_vehiculo_id") // Nombre de la columna en la tabla turnos que referencia al titular
+    private TitularVehiculo titularVehiculo; // Relación con TitularVehiculo
+
 
     public Turno(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, String estado, TitularVehiculo titularVehiculo) {
         this.fecha = fecha;

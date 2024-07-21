@@ -1,11 +1,18 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "mecanicos")
 public class Mecanico {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String nombre;
     private String apellido;
 
-    public Mecanico(int id, String nombre, String apellido) {
+    public Mecanico(Integer id, String nombre, String apellido) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -16,11 +23,11 @@ public class Mecanico {
         this.apellido = apellido;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

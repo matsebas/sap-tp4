@@ -1,20 +1,42 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name = "fichas_mecanicas")
+@Entity
 public class FichaMecanica {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Asumiendo que la base de datos genera el ID automáticamente
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mecanico_id")
     private Mecanico mecanico;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "titular_vehiculo_id")
     private TitularVehiculo titularVehiculo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
+
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private String estado;
+
+    @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Actividad> actividadesRealizadas;
+
+    @OneToMany(mappedBy = "fichaMecanica", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Repuesto> repuestosEmpleados;
+
 
     public FichaMecanica(TitularVehiculo titularVehiculo, Vehiculo vehiculo,
                          LocalDate fechaInicio) {
@@ -40,11 +62,11 @@ public class FichaMecanica {
         this.repuestosEmpleados = repuestosEmpleados;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

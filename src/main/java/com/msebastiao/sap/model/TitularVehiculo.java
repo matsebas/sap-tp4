@@ -1,14 +1,24 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "titulares_vehiculos")
 public class TitularVehiculo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String nombre;
     private String apellido;
     private String dni;
-    private List<Vehiculo> vehiculos;
+
+    @OneToMany(mappedBy = "titular", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Vehiculo> vehiculos; // Relación con Vehículo
 
 
     public TitularVehiculo(int id, String nombre, String apellido, String dni) {

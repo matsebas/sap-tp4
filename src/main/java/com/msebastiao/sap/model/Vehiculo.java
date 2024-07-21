@@ -1,11 +1,22 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "vehiculos")
 public class Vehiculo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String marca;
     private String modelo;
     private int anio;
-    private TitularVehiculo titularVehiculo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "titular_vehiculo_id")
+    private TitularVehiculo titularVehiculo; // Relación con TitularVehiculo
 
     public Vehiculo(int id, String marca, String modelo, int anio, TitularVehiculo titularVehiculo) {
         this.id = id;

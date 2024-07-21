@@ -1,11 +1,19 @@
 package com.msebastiao.sap.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Table(name = "actividades")
+@Entity
 public class Actividad {
-    private int id;
+    
+    @Id
+    private Integer id;
     private String descripcion;
-    private int tiempoEmpleado;
+    private Integer tiempoEmpleado;
     private String estado;
-    private int fichaMecanicaId;
+    private Integer fichaMecanicaId;
 
     public Actividad(int id, String descripcion, int tiempoEmpleado, String estado, int fichaMecanicaId) {
         this.id = id;
@@ -22,12 +30,16 @@ public class Actividad {
         this.fichaMecanicaId = fichaMecanicaId;
     }
 
-    public int getId() {
-        return id;
+    public Actividad() {
+
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getDescripcion() {
